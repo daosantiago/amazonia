@@ -1,0 +1,38 @@
+.centralizar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 640px; /* Ajuste o tamanho conforme necessário */
+  height: 640px; /* Ajuste o tamanho conforme necessário */
+}
+
+.btnMap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  bottom: 100px;
+  margin-left: 15px;
+
+  background: #ff9000;
+  height: 56px;
+  border-radius: 10px;
+  border: 0;
+  padding: 0 16px;
+  color: #312e38;
+  width: 10%;
+  font-weight: 500;
+  margin-top: 16px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #cc7100;
+  }
+}
