@@ -15,10 +15,28 @@ class PathViewSet(viewsets.ModelViewSet):
     serializer_class = PathSerializer
 
 
+@csrf_exempt
 def get_map(request):
+    response = JsonResponse({})
+
+    tileMap = TileMap(8, 8)
+
+    if request.method == 'POST':
+        print("Recebemos os valores")
+        data = json.loads(request.body)
+        print(data)
+
+        tileMap.set_init_point([data[0]['row'], data[0]['col']])
+        tileMap.set_pack_point([data[1]['row'], data[1]['col']])
+        tileMap.set_end_point([data[2]['row'], data[2]['col']])
+
+        shortest_path = tileMap.find_shortest_path()
+
+        print(shortest_path)
+
+        response = JsonResponse({'path': shortest_path})
+
     if request.method == 'GET':
-        tileMap = TileMap(8, 8)
-        tileMap.printM()
 
         tileMap.set_init_point([7, 0])
         tileMap.set_pack_point([0, 4])
@@ -30,10 +48,8 @@ def get_map(request):
         chess_table = tileMap.get_chess_table()
 
         response = JsonResponse({'table': chess_table})
-        # Permite acesso de todos os domínios
-        response['Access-Control-Allow-Origin'] = '*'
 
-        return response
+    return response
 
 
 @csrf_exempt

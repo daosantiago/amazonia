@@ -1,0 +1,14 @@
+# This files gather all the services / containers uses in the XPH architecture. It need to be used in dev.
+# For production use dedicated compose files (aws-back.yml & aws-prod.yml)
+
+version: '3'
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./amazonia/Dockerfile
+    command: python manage.py runserver 127.0.0.1:8000
+    volumes:
+      - ./django:/code
+    ports:
+      - '8000:8000'

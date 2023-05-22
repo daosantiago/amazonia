@@ -15,7 +15,7 @@ class TileMap:
         self.found = False
         # Create a tiles matrix
         self.tiles_matrix = [
-            [Tile(y, x) for x in range(self.height)] for y in range(self.width)]
+            [Tile(x + y * width + 1, y, x) for x in range(self.height)] for y in range(self.width)]
         self.costs_matrix = [
             [float('inf') for _ in range(self.height)] for _ in range(self.width)]
         self.init_matrix()
@@ -103,6 +103,7 @@ class TileMap:
     def dijkstra(self, start, end, initial_cost=0):
         # Initialize the costs matrix
         self.costs_matrix[start[0]][start[1]] = initial_cost
+        initial_tile = self.tiles_matrix[start[0]][start[1]]
 
         # Create a heap with the starting node
         heap = [(initial_cost, self.tiles_matrix[start[0]][start[1]])]
@@ -135,7 +136,7 @@ class TileMap:
                     neighbor.dist = current_cost
                     heapq.heappush(heap, (new_cost, neighbor))
 
-                # Reset the visited flag for all nodes
+        # Reset the visited flag for all nodes
         for row in self.tiles_matrix:
             for node in row:
                 node.visited = False
@@ -145,9 +146,13 @@ class TileMap:
         current_node = self.tiles_matrix[end[0]][end[1]]
         while current_node.previous is not None:
             cost = round((current_node.dist + current_node.cost), 2)
-            path.append((current_node.row, current_node.col, cost))
+            tile_dict = current_node.as_dict()
+            path.append((current_node.id, current_node.row,
+                        current_node.col, cost))
             current_node = current_node.previous
-        path.append((start[0], start[1], initial_cost))
+
+        path.append((initial_tile.id, initial_tile.row,
+                    initial_tile.col, initial_cost))
         path.reverse()
 
         return path
@@ -159,16 +164,17 @@ class TileMap:
         print(path1)
 
         self.reset_matrix()
+        # get the cost to the pack to be the starter cost in the second part of the path
         initial_cost = path1[-1][2]
         # Find the shortest path from P to E
         path2 = self.dijkstra(self.pack_point, self.end_point, initial_cost)
 
-        # Combine the two paths
+        # Combine two paths
         path = path1[:-1] + path2
 
         self.reset_matrix()
         for step in path:
-            self.costs_matrix[step[0]][step[1]] = 11
+            self.costs_matrix[step[1]][step[2]] = 11
 
         self.printM2()
 

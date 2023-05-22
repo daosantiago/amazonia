@@ -4,7 +4,9 @@ from .colors import MyColors
 
 
 class Tile:
-    def __init__(self, row, col):
+
+    def __init__(self, id, row, col):
+        self.id = id
         self.row = row
         self.col = col
         self.color = MyColors.empty()
@@ -15,6 +17,11 @@ class Tile:
         self.previous = None
         self.cost = round(random.uniform(10.00, 30.00), 2)
         self.coming_from = None
+
+    @classmethod
+    def get_next_id(cls):
+        cls.id_counter += 1
+        return cls.id_counter
 
     def init_cost(self):
         """Init tile's cost in costs matrix. Theres no cost for self tile"""
@@ -33,4 +40,8 @@ class Tile:
         return f"{letter}{self.col+1}"
 
     def as_dict(self):
-        return f"{self}: {self.cost}"
+        tile_dict = {}
+        tile_dict['id'] = self.id
+        tile_dict['row'] = self.row
+        tile_dict['col'] = self.col
+        return tile_dict

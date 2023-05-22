@@ -1,21 +1,43 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
 import styles from '../styles/Tile.module.css';
-export default function Tile({ index, color, clicksNumber, onCelulaClick }) {
-  const colors = ['#1fa32a', '#d6e225', '#bd1e1e'];
+import CircleIcon from '@mui/icons-material/Circle';
+import { useState, useEffect } from 'react';
 
-  const [tileColor, setTileColor] = useState(color);
+// eslint-disable-next-line react/prop-types
+const Tile = ({
+  id,
+  onCelulaClick,
+  row,
+  col,
+  checked,
+  color,
+  innerColor,
+  size,
+}) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkColor, setCheckColor] = useState(innerColor);
 
   const handleClick = () => {
-    if (clicksNumber <= 2) {
-      setTileColor(colors[clicksNumber]);
-      onCelulaClick(index);
-    }
+    onCelulaClick(id, row, col);
+    setIsChecked(!isChecked);
   };
+
+  useEffect(() => {
+    setIsChecked(checked);
+    setCheckColor(innerColor);
+  }, [checked, innerColor, isChecked]);
+
   return (
     <div
       className={styles.tile}
-      style={{ backgroundColor: tileColor }}
+      style={{ backgroundColor: color }}
       onClick={handleClick}
-    ></div>
+    >
+      {isChecked && (
+        <CircleIcon style={{ color: checkColor, fontSize: size }} />
+      )}
+    </div>
   );
-}
+};
+
+export default Tile;
