@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['http://localhost:3000',
                  "localhost", '127.0.0.1', '.vercel.app']
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    'http://localhost:3000','.vercel.app'
 ]
 
 CORS_ORIGIN_WHITELIST = [
