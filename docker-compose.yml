@@ -9,6 +9,6 @@ services:
       dockerfile: ./amazonia/Dockerfile
     command: python manage.py runserver 127.0.0.1:8000
     volumes:
-      - ./django:/code
+      - ./amazonia:/code
     ports:
       - '8000:8000'

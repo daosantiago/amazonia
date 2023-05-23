@@ -78,7 +78,7 @@ const Table = () => {
   return (
     <>
       <div>
-        <h1>Dronezonia</h1>
+        <h1>DRONEZONIA</h1>
       </div>
       <div className={styles.mapContainer}>
         <h2>

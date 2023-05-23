@@ -29,15 +29,24 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #444;
+  background-color: #dcdcdc;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: Helvetica;
+  color: #2f4f4f;
+}
+
+h2 {
+  font-family: Helvetica;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 button {
+  font-family: Helvetica;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
