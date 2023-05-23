@@ -1,4 +1,6 @@
 # Amazonia
+Projeto hospedado em:\
+https://amazonia-93hi.vercel.app/
 
 ## Projeto de desafio para processo de seleção.
 
