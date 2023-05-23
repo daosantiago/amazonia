@@ -49,7 +49,7 @@ const Table = () => {
               };
             }
           }
-          return { ...tile, innerColor: '#808080', checked: true, size: 30 };
+          return { ...tile, innerColor: '#dcdcdc', checked: true, size: 30 };
         }
       }
       return tile;
